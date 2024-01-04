@@ -5,9 +5,9 @@ import { hashPassword } from '../helps/hash_password';
 
 export const createUser = async (req: CustomRequest<IUser>, res: Response) => {
   try {
-    const { fullName, age, email, password } = req.body;
+    const { fullName, age, email, password, userName } = req.body;
 
-    if (!fullName || !age || !email || !password) {
+    if (!fullName || !age || !email || !password || !userName) {
       return res.status(400).json({ msg: 'Por favor ingrese todos los campos' });
     }
 
@@ -25,6 +25,7 @@ export const createUser = async (req: CustomRequest<IUser>, res: Response) => {
 
     const newUser: IUser = new User({
       fullName,
+      userName,
       age,
       email,
       password: hashedPassword
@@ -61,9 +62,9 @@ export const getUser = async (req: CustomRequest<IUser>, res: Response) => {
 
 export const updateUser = async (req: CustomRequest<IUser>, res: Response) => {
   try {
-    const { fullName, age, email } = req.body;
+    const { fullName, age } = req.body;
 
-    if (!fullName || !age || !email) {
+    if (!fullName || !age) {
       return res.status(400).json({ msg: 'Por favor ingrese todos los campos' });
     }
 
@@ -73,8 +74,7 @@ export const updateUser = async (req: CustomRequest<IUser>, res: Response) => {
 
     const user = await User.findByIdAndUpdate(req.params.id, {
       fullName,
-      age,
-      email,
+      age
     });
 
     res.json(user);

@@ -1,6 +1,11 @@
 import { Document, Model, Schema, model } from "mongoose";
 import { IUser } from "./User";
 
+interface UserData {
+  id: IUser['_id'];
+  userName: IUser['userName'];
+}
+
 export interface IPost extends Document {
   title: string;
   content: string;
@@ -8,14 +13,17 @@ export interface IPost extends Document {
   createdAt?: Date;
   updatedAt?: Date;
   deletedAt?: Date;
-  user: IUser['_id'];
+  user: UserData;
 }
 
 const PostSchema: Schema = new Schema({
   title: { type: String, required: true },
   content: { type: String, required: true },
   likes: { type: Number, required: true },
-  userID: { type: Schema.Types.ObjectId, ref: 'User', required: true }
+  user: {
+    id: { type: Schema.Types.ObjectId, ref: 'User', required: true },
+    userName: { type: String, required: true }
+  }
 }, {
   timestamps: true
 });

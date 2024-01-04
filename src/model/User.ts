@@ -3,6 +3,7 @@ import { IPost } from "./Post";
 
 export interface IUser extends Document {
   fullName: string;
+  userName: string;
   age: number;
   email: string;
   password: string;
@@ -14,6 +15,7 @@ export interface IUser extends Document {
 
 const UserSchema: Schema = new Schema({
   fullName: { type: String, required: true },
+  userName: { type: String, required: true },
   age: { type: Number, required: true },
   email: {
     type: String,

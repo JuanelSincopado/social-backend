@@ -1,10 +1,11 @@
 import { Request, Response } from "express";
 import Post from "../model/Post";
 import User from "../model/User";
+import { log } from "console";
 
 export const createPost = async (req: Request, res: Response) => {
   try {
-    const { title, content, userID } = req.body;
+    const { title, content, userID, userName } = req.body;
 
     if (!title || !content) {
       return res.status(400).json({ msg: 'Por favor ingrese todos los campos' });
@@ -13,7 +14,10 @@ export const createPost = async (req: Request, res: Response) => {
     const newPost = new Post({
       title,
       content,
-      userID,
+      user: {
+        id: userID,
+        userName: userName,
+      },
       likes: 0
     });
 
@@ -42,15 +46,14 @@ export const getAllPosts = async (req: Request, res: Response) => {
 
 export const updatePost = async (req: Request, res: Response) => {
   try {
-    const { title, content } = req.body;
+    const { title, content, likes } = req.body;
 
-    if (!title || !content) {
-      return res.status(400).json({ msg: 'Por favor ingrese todos los campos' });
-    }
+    log(req.body);
 
     const post = await Post.findByIdAndUpdate(req.params.id, {
       title,
-      content
+      content,
+      likes,
     });
 
     res.json(post);
