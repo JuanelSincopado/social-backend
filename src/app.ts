@@ -9,8 +9,8 @@ app.use(express.json());
 
 connectDB()
 
-app.use("/login", loginRoutes)
 app.use("/user", userRouter)
+app.use("/login", loginRoutes)
 
 app.listen(3000, () => {
   console.log("Server started on port 3000");
