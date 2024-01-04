@@ -20,11 +20,12 @@ Antes de ejecutar la aplicación, asegúrate de configurar las siguientes variab
 
 ## Uso
 
-Para iniciar la aplicación, ejecuta el siguiente comando: ```
+Para iniciar la aplicación, ejecuta el siguiente comando:
+
+```
 npm run dev
 
 ```
-
 
 > [!NOTE]
 > Por falta de tiempo la aplicación tendrá bugs y errores. Me enfoqué en la funcionalidad y poco a poco refactorizar.
