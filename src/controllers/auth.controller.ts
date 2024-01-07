@@ -15,7 +15,7 @@ export const authUser = async (req: CustomRequest<ILogin>, res: Response) => {
   const user = await User.findOne({ email });
 
   if (!user) {
-    return res.status(400).json({ msg: 'El correo no existe' });
+    return res.status(401).json({ msg: 'El correo no existe' });
   }
 
   if (await comparePassword(password, user.password)) {

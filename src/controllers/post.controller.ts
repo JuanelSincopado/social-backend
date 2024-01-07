@@ -65,7 +65,9 @@ export const updatePost = async (req: Request, res: Response) => {
 
 export const deletePost = async (req: Request, res: Response) => {
   try {
-    const post = await Post.findByIdAndDelete(req.params.id);
+    const post = await Post.findByIdAndUpdate(req.params.id, {
+      deletedAt: new Date()
+    });
 
     if (!post) {
       return res.status(404).json({ msg: 'No se encontró el post' });

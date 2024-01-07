@@ -23,7 +23,8 @@ const PostSchema: Schema = new Schema({
   user: {
     id: { type: Schema.Types.ObjectId, ref: 'User', required: true },
     userName: { type: String, required: true }
-  }
+  },
+  deletedAt: { type: Date, default: null }
 }, {
   timestamps: true
 });
