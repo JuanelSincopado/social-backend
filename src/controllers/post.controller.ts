@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
 import Post from "../model/Post";
 import User from "../model/User";
-import { log } from "console";
 
 export const createPost = async (req: Request, res: Response) => {
   try {
@@ -36,7 +35,12 @@ export const createPost = async (req: Request, res: Response) => {
 export const getAllPosts = async (req: Request, res: Response) => {
   try {
     const posts = await Post.find();
-    res.json(posts);
+
+    const sortedByDate = posts.sort((a, b) => {
+      return b.createdAt.getTime() - a.createdAt.getTime();
+    });
+
+    res.json(sortedByDate);
   } catch (error) {
     console.error(error);
     res.status(500).send('Error interno del servidor');
@@ -46,8 +50,6 @@ export const getAllPosts = async (req: Request, res: Response) => {
 export const updatePost = async (req: Request, res: Response) => {
   try {
     const { title, content, likes } = req.body;
-
-    log(req.body);
 
     const post = await Post.findByIdAndUpdate(req.params.id, {
       title,

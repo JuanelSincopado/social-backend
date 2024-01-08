@@ -15,10 +15,17 @@ export const createUser = async (req: CustomRequest<IUser>, res: Response) => {
       return res.status(400).json({ msg: 'Ingese una edad válida' });
     }
 
-    const exist = await User.findOne({ email });
+    const existEmail = await User.findOne({ email });
 
-    if (exist) {
+
+    if (existEmail) {
       return res.status(400).json({ msg: 'El correo ya existe' });
+    }
+
+    const existUserName = await User.findOne({ userName });
+
+    if (existUserName) {
+      return res.status(400).json({ msg: 'El nombre de usuario ya existe' });
     }
 
     const hashedPassword = await hashPassword(password);

@@ -10,8 +10,8 @@ export interface IPost extends Document {
   title: string;
   content: string;
   likes: IUser['_id'][];
-  createdAt?: Date;
-  updatedAt?: Date;
+  createdAt: Date;
+  updatedAt: Date;
   deletedAt?: Date;
   user: UserData;
 }
