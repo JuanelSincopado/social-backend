@@ -18,7 +18,6 @@ export const createPost = async (req: Request, res: Response) => {
         id: userID,
         userName: userName,
       },
-      likes: 0
     });
 
     await newPost.save();

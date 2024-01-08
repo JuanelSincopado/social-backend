@@ -9,7 +9,7 @@ interface UserData {
 export interface IPost extends Document {
   title: string;
   content: string;
-  likes: number;
+  likes: IUser['_id'][];
   createdAt?: Date;
   updatedAt?: Date;
   deletedAt?: Date;
@@ -19,7 +19,7 @@ export interface IPost extends Document {
 const PostSchema: Schema = new Schema({
   title: { type: String, required: true },
   content: { type: String, required: true },
-  likes: { type: Number, required: true },
+  likes: [{ type: Schema.Types.ObjectId, ref: 'User' }],
   user: {
     id: { type: Schema.Types.ObjectId, ref: 'User', required: true },
     userName: { type: String, required: true }
