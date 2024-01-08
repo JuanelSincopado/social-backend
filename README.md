@@ -15,8 +15,11 @@ Asegúrate de tener instalado Node.js en tu máquina.
 
 Antes de ejecutar la aplicación, asegúrate de configurar las siguientes variables de entorno:
 
-- `MONGODB_URI`: La URL de conexión a la base de datos MongoDB.
-- `PORT`: El puerto en el que se ejecutará el servidor Express.
+- `MONGO_URI`: La URL de conexión a la base de datos MongoDB.
+- `SIGN_JWT`: La firma secreta de los jwt.
+
+> [!NOTE]
+> la firma del JWT es "secret". Siempre manejo las firmas de forma privada en los archivos .env pero por motivos de la prueba lo hago público.
 
 ## Uso
 
